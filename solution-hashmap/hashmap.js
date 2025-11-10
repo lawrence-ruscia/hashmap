@@ -102,6 +102,17 @@ export class HashMap {
     return keysArr;
   }
 
+  values() {
+    const valuesArr = [];
+    for (const bucket of this.#buckets) {
+      for (const pair of bucket) {
+        valuesArr.push(pair.value);
+      }
+    }
+
+    return valuesArr;
+  }
+
   #hash(key, bucketLength = this.#buckets.length) {
     key = String(key);
 
