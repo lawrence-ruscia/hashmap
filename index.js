@@ -16,6 +16,5 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-console.log('Before clear: ', { length: map.length });
-map.clear();
-console.log('After clear: ', { length: map.length });
+const keys = map.keys();
+console.log({ keys });

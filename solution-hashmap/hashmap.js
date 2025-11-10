@@ -91,6 +91,17 @@ export class HashMap {
     this.#size = 0;
   }
 
+  keys() {
+    const keysArr = [];
+    for (const bucket of this.#buckets) {
+      for (const pair of bucket) {
+        keysArr.push(pair.key);
+      }
+    }
+
+    return keysArr;
+  }
+
   #hash(key, bucketLength = this.#buckets.length) {
     key = String(key);
 
