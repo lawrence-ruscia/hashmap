@@ -12,28 +12,21 @@ export class HashMap {
     this.#size = 0;
   }
 
-  hash(key) {
+  hash(key, bucketLength = this.#buckets.length) {
     key = String(key);
 
     let hashcode = 0;
 
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
-      hashcode =
-        (primeNumber * hashcode + key.charCodeAt(i)) % this.#buckets.length;
+      hashcode = (primeNumber * hashcode + key.charCodeAt(i)) % bucketLength;
     }
 
     return hashcode;
   }
 
   set(key, value) {
-    const hashcode = this.hash(key);
-
     const index = this.hash(key);
-
-    if (index < 0 || index >= this.#buckets.length) {
-      throw new Error('Trying to access index out of bounds');
-    }
 
     // Access bucket list through index
     const bucket = this.#buckets[index];
@@ -49,11 +42,43 @@ export class HashMap {
     bucket.push({ key, value });
     this.#size++;
     console.log('Inserted pair: ', { key, value });
+    console.log('Current size: ', this.#size);
 
     const threshold = Math.ceil(this.#capacity * this.#loadFactor);
+
     if (this.#size >= threshold) {
-      // TODO: Resize array
-      console.log('Map is full!');
+      this.#resize();
+    }
+  }
+
+  #resize() {
+    // Double capacity
+    this.#capacity *= 2;
+
+    // Allocate bigger bucket array
+    const newBuckets = Array.from({ length: this.#capacity }, () => []);
+
+    // Rehash every key using new buckets
+    this.#rehash(newBuckets);
+
+    // Replace old bucket with the new one
+    this.#buckets = newBuckets;
+
+    console.log('Map Resized: ', this.#buckets.length);
+  }
+
+  #rehash(newBuckets) {
+    for (const oldBucket of this.#buckets) {
+      if (oldBucket.length > 0) {
+        // Insert each key-value pair into its new bucket
+        for (const pair of oldBucket) {
+          const index = this.hash(pair.key, newBuckets.length);
+
+          const bucket = newBuckets[index];
+
+          bucket.push({ key: pair.key, value: pair.value });
+        }
+      }
     }
   }
 }
