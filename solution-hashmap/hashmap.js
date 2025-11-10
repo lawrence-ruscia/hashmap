@@ -102,7 +102,7 @@ export class HashMap {
     return keysArr;
   }
 
-  values() {
+  entries() {
     const valuesArr = [];
     for (const bucket of this.#buckets) {
       for (const pair of bucket) {
@@ -111,6 +111,17 @@ export class HashMap {
     }
 
     return valuesArr;
+  }
+
+  entries() {
+    const entries = [];
+    for (const bucket of this.#buckets) {
+      for (const pair of bucket) {
+        entries.push(pair);
+      }
+    }
+
+    return entries;
   }
 
   #hash(key, bucketLength = this.#buckets.length) {

@@ -16,5 +16,5 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-const values = map.values();
-console.log({ keys: values });
+const entries = map.entries();
+console.log({ entries });
