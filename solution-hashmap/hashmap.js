@@ -17,7 +17,7 @@ export class HashMap {
   }
 
   set(key, value) {
-    const index = this.hash(key);
+    const index = this.#hash(key);
 
     // Access bucket list through index
     const bucket = this.#buckets[index];
@@ -57,7 +57,7 @@ export class HashMap {
   }
 
   has(key) {
-    const index = this.hash(key);
+    const index = this.#hash(key);
 
     const bucket = this.#buckets[index];
 
@@ -71,7 +71,7 @@ export class HashMap {
   }
 
   remove(key) {
-    const index = this.hash(key);
+    const index = this.#hash(key);
 
     const bucket = this.#buckets[index];
     for (let i = 0; i < bucket.length; i++) {
@@ -84,6 +84,11 @@ export class HashMap {
     }
 
     return false;
+  }
+
+  clear() {
+    this.#buckets = Array.from({ length: this.#capacity }, () => []);
+    this.#size = 0;
   }
 
   #hash(key, bucketLength = this.#buckets.length) {
@@ -120,7 +125,7 @@ export class HashMap {
       if (oldBucket.length > 0) {
         // Insert each key-value pair into its new bucket
         for (const pair of oldBucket) {
-          const index = this.hash(pair.key, newBuckets.length);
+          const index = this.#hash(pair.key, newBuckets.length);
 
           const bucket = newBuckets[index];
 

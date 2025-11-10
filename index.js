@@ -16,6 +16,6 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-const length = map.length;
-
-console.log({ length });
+console.log('Before clear: ', { length: map.length });
+map.clear();
+console.log('After clear: ', { length: map.length });
