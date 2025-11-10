@@ -37,7 +37,7 @@ export class HashMap {
 
     const threshold = Math.ceil(this.#capacity * this.#loadFactor);
 
-    if (this.#size >= threshold) {
+    if (this.#size > threshold) {
       this.#resize();
     }
   }
