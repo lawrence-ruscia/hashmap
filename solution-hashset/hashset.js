@@ -41,10 +41,12 @@ export class HashSet {
 
     if (bucket.includes(value)) {
       for (let i = 0; i < bucket.length; i++) {
-        if (bucket[i] === value) bucket.splice(i, 1);
+        if (bucket[i] === value) {
+          bucket.splice(i, 1);
+          this.#size -= 1;
+          return true;
+        }
       }
-
-      return true;
     }
 
     return false;
