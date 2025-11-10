@@ -79,6 +79,22 @@ export class HashMap {
     return false;
   }
 
+  remove(key) {
+    const index = this.hash(key);
+
+    const bucket = this.#buckets[index];
+    for (let i = 0; i < bucket.length; i++) {
+      const pair = bucket[i];
+      if (pair.key === key) {
+        bucket.splice(i, 1);
+        this.#size -= 1;
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   #resize() {
     // Double capacity
     this.#capacity *= 2;

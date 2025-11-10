@@ -16,6 +16,6 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-const hasApple = map.has('apple');
+const removeMoon = map.remove('moon');
 
-console.log({ hasApple });
+console.log({ removeMoon });
