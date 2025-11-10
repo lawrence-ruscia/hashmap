@@ -15,3 +15,7 @@ map.set('jacket', 'blue');
 map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
+
+const getBlack = map.get('sdds');
+
+console.log(getBlack);
