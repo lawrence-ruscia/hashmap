@@ -16,6 +16,6 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-const getBlack = map.get('sdds');
+const hasApple = map.has('apple');
 
-console.log(getBlack);
+console.log({ hasApple });

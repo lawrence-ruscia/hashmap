@@ -65,6 +65,20 @@ export class HashMap {
     return null;
   }
 
+  has(key) {
+    const index = this.hash(key);
+
+    const bucket = this.#buckets[index];
+
+    for (const pair of bucket) {
+      if (pair.key === key) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   #resize() {
     // Double capacity
     this.#capacity *= 2;
