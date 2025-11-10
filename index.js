@@ -16,6 +16,6 @@ map.set('kite', 'pink');
 map.set('lion', 'golden');
 map.set('moon', 'silver');
 
-const removeMoon = map.remove('moon');
+const length = map.length;
 
-console.log({ removeMoon });
+console.log({ length });

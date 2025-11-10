@@ -95,6 +95,10 @@ export class HashMap {
     return false;
   }
 
+  get length() {
+    return this.#size;
+  }
+
   #resize() {
     // Double capacity
     this.#capacity *= 2;
