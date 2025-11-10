@@ -12,17 +12,8 @@ export class HashMap {
     this.#size = 0;
   }
 
-  hash(key, bucketLength = this.#buckets.length) {
-    key = String(key);
-
-    let hashcode = 0;
-
-    const primeNumber = 31;
-    for (let i = 0; i < key.length; i++) {
-      hashcode = (primeNumber * hashcode + key.charCodeAt(i)) % bucketLength;
-    }
-
-    return hashcode;
+  get length() {
+    return this.#size;
   }
 
   set(key, value) {
@@ -95,8 +86,17 @@ export class HashMap {
     return false;
   }
 
-  get length() {
-    return this.#size;
+  #hash(key, bucketLength = this.#buckets.length) {
+    key = String(key);
+
+    let hashcode = 0;
+
+    const primeNumber = 31;
+    for (let i = 0; i < key.length; i++) {
+      hashcode = (primeNumber * hashcode + key.charCodeAt(i)) % bucketLength;
+    }
+
+    return hashcode;
   }
 
   #resize() {
